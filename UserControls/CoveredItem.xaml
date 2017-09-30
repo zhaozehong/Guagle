@@ -1,0 +1,24 @@
+﻿<UserControl x:Class="Zehong.CShart.Solution.UserControls.CoveredItem" x:Name="Self"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:AppStrings="clr-namespace:Zehong.CSharp.Solution.AppStrings.Properties;assembly=AppStrings"
+             HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
+  <UserControl.Resources>
+    <ResourceDictionary>
+      <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/HelperLib;Component/Resources/Brushes.xaml"/>
+      </ResourceDictionary.MergedDictionaries>
+
+      <BooleanToVisibilityConverter x:Key="BoolToVisibility"/>
+    </ResourceDictionary>
+  </UserControl.Resources>
+  <Border Margin="0" Padding="0" BorderThickness="1" BorderBrush="{StaticResource BlackBrush}">
+    <Grid>
+      <Label HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Transparent"
+             VerticalContentAlignment="Center" HorizontalContentAlignment="Center"
+             Content="{Binding ElementName=Self, Path=Code}"/>
+      <TextBlock Background="LightBlue" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ToolTip="{x:Null}"
+                 MouseLeftButtonDown="tbCover_MouseLeftButtonDown"/>
+    </Grid>
+  </Border>
+</UserControl>

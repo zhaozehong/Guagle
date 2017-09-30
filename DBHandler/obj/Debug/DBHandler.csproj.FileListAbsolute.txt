@@ -1,0 +1,16 @@
+C:\Users\zehong.zhao\Documents\Solution\DBHandler\obj\Debug\DBHandler.csprojResolveAssemblyReference.cache
+C:\Users\zehong.zhao\Documents\Solution\DBHandler\obj\Debug\Dialogs\DatabaseDialog.g.cs
+C:\Users\zehong.zhao\Documents\Solution\DBHandler\obj\Debug\DBHandler_MarkupCompile.cache
+C:\Users\zehong.zhao\Documents\Solution\DBHandler\obj\Debug\DBHandler_MarkupCompile.lref
+C:\Users\zehong.zhao\Documents\Solution\DBHandler\bin\Debug\DBHandler.dll
+C:\Users\zehong.zhao\Documents\Solution\DBHandler\bin\Debug\DBHandler.pdb
+C:\Users\zehong.zhao\Documents\Solution\DBHandler\bin\Debug\AppStrings.dll
+C:\Users\zehong.zhao\Documents\Solution\DBHandler\bin\Debug\HelperLib.dll
+C:\Users\zehong.zhao\Documents\Solution\DBHandler\bin\Debug\AppStrings.pdb
+C:\Users\zehong.zhao\Documents\Solution\DBHandler\bin\Debug\HelperLib.pdb
+C:\Users\zehong.zhao\Documents\Solution\DBHandler\obj\Debug\Dialogs\DatabaseDialog.baml
+C:\Users\zehong.zhao\Documents\Solution\DBHandler\obj\Debug\DBHandler.g.resources
+C:\Users\zehong.zhao\Documents\Solution\DBHandler\obj\Debug\Zehong.CSharp.Solution.DBHandler.Properties.Resources.resources
+C:\Users\zehong.zhao\Documents\Solution\DBHandler\obj\Debug\DBHandler.csproj.GenerateResource.Cache
+C:\Users\zehong.zhao\Documents\Solution\DBHandler\obj\Debug\DBHandler.dll
+C:\Users\zehong.zhao\Documents\Solution\DBHandler\obj\Debug\DBHandler.pdb

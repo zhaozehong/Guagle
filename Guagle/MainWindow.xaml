@@ -1,0 +1,47 @@
+﻿<Window x:Class="CSharp.Solution.Guagle.MainWindow" x:Name="Self"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CSharp.Solution.Guagle"
+        xmlns:AppStrings="clr-namespace:Zehong.CSharp.Solution.AppStrings.Properties;assembly=AppStrings"
+        Title="Guagua Play" SizeToContent="WidthAndHeight" MinHeight="200" MinWidth="300">
+  <Window.Resources>
+    <ResourceDictionary>
+      <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/HelperLib;Component/Resources/Styles/Styles.xaml"/>
+      </ResourceDictionary.MergedDictionaries>
+    </ResourceDictionary>
+  </Window.Resources>
+  <Border Style="{StaticResource WindowOutBorderStyle}">
+    <Grid DataContext="{Binding ElementName=Self, Path=Model}">
+      <Grid.RowDefinitions>
+        <RowDefinition Height="Auto"/>
+        <RowDefinition Height="*"/>
+        <RowDefinition Height="Auto"/>
+      </Grid.RowDefinitions>
+
+      <Grid Grid.Row="0">
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="Auto"/>
+          <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <TextBlock Grid.Column="0" Text="Server prompt: "/>
+        <TextBlock Grid.Column="1" Foreground="Blue" FontWeight="Bold"
+                   Text="{Binding Path=Prompt}"/>
+      </Grid>
+      <Grid Grid.Row="1" Name="GuaguaGrid" PreviewMouseLeftButtonDown="GuaguaGrid_PreviewMouseLeftButtonDown">
+        
+      </Grid>
+      <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right">
+        <Button Style="{StaticResource DialogCloseButtonStyle}" Click="btnRequest_Click"
+                Content="{x:Static AppStrings:Resources.Common_Request}"/>
+        <Button Style="{StaticResource DialogCloseButtonStyle}" Click="btnRequestAgain_Click"
+                IsEnabled="{Binding Path=CanRequestAgain}"
+                Content="{x:Static AppStrings:Resources.Common_Again}"/>
+        <Button Style="{StaticResource DialogCloseButtonStyle}" IsCancel="True"
+                Content="{x:Static AppStrings:Resources.Common_OK}"/>
+      </StackPanel>
+    </Grid>
+  </Border>
+</Window>

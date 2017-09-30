@@ -1,0 +1,45 @@
+﻿<Window x:Class="Zehong.CSharp.Solution.DBHandler.DatabaseDialog" x:Name="Self"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:Local="clr-namespace:Zehong.CSharp.Solution.DBHandler"
+        xmlns:AppStrings="clr-namespace:Zehong.CSharp.Solution.AppStrings.Properties;assembly=AppStrings"
+        Title="{x:Static AppStrings:Resources.DatabaseDialog_Title}" SizeToContent="WidthAndHeight">
+  <Window.Resources>
+    <ResourceDictionary>
+      <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/HelperLib;Component/Resources/Styles/Styles.xaml"/>
+      </ResourceDictionary.MergedDictionaries>
+    </ResourceDictionary>
+  </Window.Resources>
+  <Border Style="{StaticResource WindowOutBorderStyle}">
+    <StackPanel DataContext="{Binding ElementName=Self, Path=Model}">
+      <Grid>
+        <Grid.RowDefinitions>
+          <RowDefinition Height="Auto"/>
+          <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="Auto"/>
+          <ColumnDefinition Width="*"/>
+          <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+
+        <TextBlock Grid.Row="0" Grid.Column="0" Text="{x:Static AppStrings:Resources.Common_DirectoryColon}"/>
+        <TextBox Grid.Row="0" Grid.Column="1" MinWidth="180" IsEnabled="False"
+                 Text="{Binding Path=DatabaseFolder}"/>
+        <Button Grid.Row="0" Grid.Column="2" Style="{StaticResource BrowserButtonStyle}" Click="btnDatabaseFolder_Click"/>
+
+        <TextBlock Grid.Row="1" Grid.Column="0" Text="Database name:"/>
+        <ComboBox Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" IsEditable="True"
+                  ItemsSource="{Binding Path=AvailableDatabases}"
+                  Text="{Binding Path=DatabaseName}"/>
+      </Grid>
+      <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+        <Button Style="{StaticResource DialogCloseButtonStyle}" IsDefault="True" Click="btnOK_Click"
+                Content="{x:Static AppStrings:Resources.Common_OK}"/>
+        <Button Style="{StaticResource DialogCloseButtonStyle}" IsCancel="True"
+                Content="{x:Static AppStrings:Resources.Common_Cancel}"/>
+      </StackPanel>
+    </StackPanel>
+  </Border>
+</Window>

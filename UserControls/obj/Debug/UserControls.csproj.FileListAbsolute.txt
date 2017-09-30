@@ -1,0 +1,15 @@
+C:\Users\zehong.zhao\Documents\Solution\UserControls\obj\Debug\UserControls.csprojResolveAssemblyReference.cache
+C:\Users\zehong.zhao\Documents\Solution\UserControls\obj\Debug\CoveredItem.g.cs
+C:\Users\zehong.zhao\Documents\Solution\UserControls\obj\Debug\UserControls_MarkupCompile.cache
+C:\Users\zehong.zhao\Documents\Solution\UserControls\obj\Debug\CoveredItem.baml
+C:\Users\zehong.zhao\Documents\Solution\UserControls\obj\Debug\UserControls.g.resources
+C:\Users\zehong.zhao\Documents\Solution\UserControls\obj\Debug\Zehong.CShart.Solution.UserControls.Properties.Resources.resources
+C:\Users\zehong.zhao\Documents\Solution\UserControls\obj\Debug\UserControls.csproj.GenerateResource.Cache
+C:\Users\zehong.zhao\Documents\Solution\UserControls\bin\Debug\UserControls.dll
+C:\Users\zehong.zhao\Documents\Solution\UserControls\bin\Debug\UserControls.pdb
+C:\Users\zehong.zhao\Documents\Solution\UserControls\bin\Debug\AppStrings.dll
+C:\Users\zehong.zhao\Documents\Solution\UserControls\bin\Debug\HelperLib.dll
+C:\Users\zehong.zhao\Documents\Solution\UserControls\bin\Debug\AppStrings.pdb
+C:\Users\zehong.zhao\Documents\Solution\UserControls\bin\Debug\HelperLib.pdb
+C:\Users\zehong.zhao\Documents\Solution\UserControls\obj\Debug\UserControls.dll
+C:\Users\zehong.zhao\Documents\Solution\UserControls\obj\Debug\UserControls.pdb

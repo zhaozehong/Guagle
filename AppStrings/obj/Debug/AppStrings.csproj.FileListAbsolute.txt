@@ -1,0 +1,7 @@
+C:\Users\zehong.zhao\Documents\Solution\AppStrings\bin\Debug\AppStrings.dll
+C:\Users\zehong.zhao\Documents\Solution\AppStrings\bin\Debug\AppStrings.pdb
+C:\Users\zehong.zhao\Documents\Solution\AppStrings\obj\Debug\Zehong.CSharp.Solution.AppStrings.Properties.Resources.resources
+C:\Users\zehong.zhao\Documents\Solution\AppStrings\obj\Debug\AppStrings.csproj.GenerateResource.Cache
+C:\Users\zehong.zhao\Documents\Solution\AppStrings\obj\Debug\AppStrings.dll
+C:\Users\zehong.zhao\Documents\Solution\AppStrings\obj\Debug\AppStrings.pdb
+C:\Users\zehong.zhao\Documents\Solution\AppStrings\obj\Debug\AppStrings.csprojResolveAssemblyReference.cache
