@@ -162,4 +162,7 @@
   <data name="Common_Again" xml:space="preserve">
     <value>Again</value>
   </data>
+  <data name="Common_Test" xml:space="preserve">
+    <value>Test</value>
+  </data>
 </root>

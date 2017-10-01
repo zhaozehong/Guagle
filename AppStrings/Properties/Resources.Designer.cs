@@ -115,6 +115,15 @@ namespace Zehong.CSharp.Solution.AppStrings.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Test.
+        /// </summary>
+        public static string Common_Test {
+            get {
+                return ResourceManager.GetString("Common_Test", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Verify.
         /// </summary>
         public static string Common_Verify {

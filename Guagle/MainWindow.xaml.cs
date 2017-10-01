@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -87,6 +88,17 @@ namespace CSharp.Solution.Guagle
     }
 
     public GuagleWindowModel Model { get; private set; }
+
+    private void btnTest_Click(object sender, RoutedEventArgs e)
+    {
+      var md5Array = Helper.GetMD5HashFromFile(@"D:\丹霞山.jpg");
+      var result = 0;
+      for (int i = 0; i < md5Array.Length; i++)
+      {
+        result += (Int32)md5Array[i];
+      }
+      MessageBox.Show(result.ToString());
+    }
   }
 
   public class GuagleWindowModel : NotifyPropertyChangedImp
@@ -96,6 +108,10 @@ namespace CSharp.Solution.Guagle
       this.RowCount = Rows[Helper.RandomObj.Next(2)];
       this.ColumnCount = Columns[Helper.RandomObj.Next(3)];
       this.DB = new GuagleDataContext(this.RowCount, this.ColumnCount, 4);
+
+      _randomObj1 = new Random(2);
+      System.Threading.Thread.Sleep(1000);
+      _randomObj2 = new Random(2);
     }
 
     public String RandomRequest(out IVerification verifier)
@@ -188,11 +204,64 @@ namespace CSharp.Solution.Guagle
         }
       }
     }
-
+    public String RandomString1
+    {
+      get
+      {
+        if (_randomString1 == null)
+        {
+          var valueList = new List<Int32>();
+          for (int i = 0; i < 10; i++)
+          {
+            valueList.Add(_randomObj1.Next(10));
+          }
+          _randomString1 = Helper.ListToString(valueList);
+        }
+        return _randomString1;
+      }
+      set
+      {
+        if (!String.Equals(_randomString1, value))
+        {
+          _randomString1 = value;
+          this.SendPropertyChanged(() => RandomString1);
+        }
+      }
+    }
+    public String RandomString2
+    {
+      get
+      {
+        if (_randomString2 == null)
+        {
+          var valueList = new List<Int32>();
+          for (int i = 0; i < 10; i++)
+          {
+            valueList.Add(_randomObj2.Next(10));
+          }
+          _randomString2 = Helper.ListToString(valueList);
+        }
+        return _randomString2;
+      }
+      set
+      {
+        if (!String.Equals(_randomString2, value))
+        {
+          _randomString2 = value;
+          this.SendPropertyChanged(() => RandomString2);
+        }
+      }
+    }
+    
     private GuagleDataContext DB = null;
     private String _strRequest = null;
     private String _strRequestBackup = null;
     private String _prompt = null;
+    
+    private Random _randomObj1 = null;
+    private Random _randomObj2 = null;
+    private String _randomString1 = null;
+    private String _randomString2 = null;
 
     private static Int16[] Rows = new Int16[] { 3, 4 };
     private static Int16[] Columns = new Int16[] { 3, 4, 5 };

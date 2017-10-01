@@ -56,6 +56,10 @@
     <Compile Include="Extensions\DispatcherObjectExternsion.cs" />
     <Compile Include="Helper.cs" />
     <Compile Include="Interfaces\NotifyPropertyChangedImp.cs" />
+    <Compile Include="OS\Enums.cs" />
+    <Compile Include="OS\structs.cs" />
+    <Compile Include="OS\Win32.cs" />
+    <Compile Include="OS\Windows.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -71,6 +75,7 @@
     </Compile>
     <Compile Include="Registry\RegOperator.cs" />
     <Compile Include="SSTCryptographer.cs" />
+    <Compile Include="WindowsManager.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

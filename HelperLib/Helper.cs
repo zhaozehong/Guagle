@@ -10,6 +10,7 @@ using System.Text.RegularExpressions;
 using System.Windows;
 using System.Security.Principal;
 using System.Globalization;
+using System.Security.Cryptography;
 
 namespace Zehong.CShart.Solution.HelperLib
 {
@@ -163,7 +164,78 @@ namespace Zehong.CShart.Solution.HelperLib
       var principal = new WindowsPrincipal(identity);
       return principal.IsInRole(WindowsBuiltInRole.Administrator);
     }
-    public static List<Int32> StringToIntList(String strSource, String separator = ",")
+    public static Boolean? ShowDialog(Window dialog, Boolean isDefaultPosition = true)
+    {
+      if (Application.Current != null && Application.Current.CheckAccess() == false)
+      {
+        Boolean? retValue = null;
+        Application.Current.Dispatcher.Invoke(new Action(() => retValue = ShowDialog(dialog, isDefaultPosition)));
+        return retValue;
+      }
+
+      Debug.Assert(dialog != null);
+      if (dialog == null)
+        return null;
+      Boolean? isEnabledOld = null;
+      var isTopmostOld = dialog.Topmost;
+      if (Helper.IsBrowserApplication)
+      {
+        if (Application.Current != null && Application.Current.MainWindow != null)
+        {
+          isEnabledOld = OS.Win32.IsWindowEnabled(OS.Win32.GetActiveWindow());
+          OS.Win32.EnableWindow(OS.Win32.GetActiveWindow(), false);
+
+          if (isDefaultPosition)
+            dialog.Loaded += new RoutedEventHandler(OnBrowserApplicationDialog_Loaded);
+        }
+        dialog.Topmost = true;
+      }
+      else
+      {
+        if (Application.Current != null && !dialog.Equals(Application.Current.MainWindow) && Application.Current.MainWindow.IsLoaded
+          && Application.Current.MainWindow.Visibility == Visibility.Visible)
+        {
+          dialog.Owner = Application.Current.MainWindow;
+          if (dialog.Icon == null)
+            dialog.Icon = Application.Current.MainWindow.Icon;
+        }
+        if (isDefaultPosition)
+          dialog.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+      }
+
+      dialog.ShowInTaskbar = false;  // model dialog should not show icon in the task bar.
+      using (new CursorSetter(null))
+      {
+        WindowsManager.Current.AddDialog(dialog);
+        bool? result = dialog.ShowDialog();
+        WindowsManager.Current.RemoveDialog(dialog);
+
+        if (isEnabledOld != null)
+          OS.Win32.EnableWindow(OS.Win32.GetActiveWindow(), isEnabledOld ?? true);
+
+        dialog.Loaded -= new RoutedEventHandler(OnBrowserApplicationDialog_Loaded);
+        dialog.Topmost = isTopmostOld;
+
+        return result;
+      }
+    }
+    private static void OnBrowserApplicationDialog_Loaded(object sender, RoutedEventArgs e)
+    {
+      var dialog = sender as Window;
+      if (dialog == null || !Helper.IsBrowserApplication)
+        return;
+
+      if (Application.Current != null && Application.Current.MainWindow != null)
+      {
+        var orginalPoint = Application.Current.MainWindow.PointToScreen(new Point(0, 0));
+        dialog.WindowStartupLocation = WindowStartupLocation.Manual;
+        dialog.Left = orginalPoint.X + (Application.Current.MainWindow.Width - dialog.Width) / 2;
+        dialog.Top = orginalPoint.Y + (Application.Current.MainWindow.Height - dialog.Height) / 2;
+      }
+    }
+
+    // String<----->List
+    public static List<Int32> StringToIntList(String strSource, String separator = ";")
     {
       var intList = new List<Int32>();
       var strList = StringToList(strSource, separator);
@@ -175,21 +247,76 @@ namespace Zehong.CShart.Solution.HelperLib
       }
       return intList;
     }
-    public static List<String> StringToList(String str, String separator = ",", Boolean keepEmptyEntries = true)
+    public static List<String> StringToList(String strSource, String separator = ";", Boolean keepEmptyEntries = true)
     {
       var retList = new List<String>();
-      if (String.IsNullOrWhiteSpace(str))
+      if (String.IsNullOrWhiteSpace(strSource))
         return retList;
 
-      var eachStrList = str.Split(new String[] { separator }, StringSplitOptions.None);
-      foreach (var eachStr in eachStrList)
+      var strArray = strSource.Split(new String[] { separator }, StringSplitOptions.None);
+      foreach (var str in strArray)
       {
-        if (keepEmptyEntries || !String.IsNullOrWhiteSpace(eachStr))
-          retList.Add(eachStr);
+        if (keepEmptyEntries || !String.IsNullOrWhiteSpace(str))
+          retList.Add(str);
       }
       return retList;
     }
+    public static List<T> StringToList<T>(String strSource, String separator = ";")
+    {
+      var retList = new List<T>();
+      var strList = StringToList(strSource, separator);
+      foreach (var str in strList)
+      {
+        var value = str.SafeConvertInvariantStringTo<T>();
+        retList.Add(value);
+      }
+      return retList;
+    }
+    public static String ListToString<T>(List<T> dataList, String separator = ";")
+    {
+      if (dataList == null || !dataList.Any())
+        return String.Empty;
 
+      var strReturn = String.Empty;
+      for (int i = 0; i < dataList.Count; i++)
+      {
+        if (i == dataList.Count - 1)
+          strReturn += (dataList[i] != null ? dataList[i].ToString() : String.Empty);
+        else
+          strReturn += (dataList[i] != null ? dataList[i].ToString() : String.Empty) + separator;
+      }
+      return strReturn;
+    }
+
+    // MD5
+    public static byte[] GetMD5HashFromString(String strSource)
+    {
+      var md5 = new MD5CryptoServiceProvider();
+      var sourceBytes = ASCIIEncoding.Default.GetBytes(strSource);
+      return md5.ComputeHash(sourceBytes);
+    }
+    public static byte[] GetMD5HashFromFile(String filePath)
+    {
+      using (var file = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.Read))
+      {
+        var hash = GetMD5HashFromStream(file);
+        file.Close();
+        return hash;
+      }
+    }
+    public static byte[] GetMD5HashFromStream(Stream inputStream)
+    {
+      Debug.Print("TotalMemory : {0}", GC.GetTotalMemory(false));
+      inputStream.Position = 0;
+      using (var md5 = new MD5CryptoServiceProvider())
+      {
+        var hash = md5.ComputeHash(inputStream);
+        Debug.Print("TotalMemory : {0}", GC.GetTotalMemory(false));
+        md5.Clear();
+        Debug.Print("TotalMemory : {0}", GC.GetTotalMemory(false));
+        return hash;
+      }
+    }
 
 
     public static ApplicationTypes ApplicationType { get; set; }
@@ -213,6 +340,9 @@ namespace Zehong.CShart.Solution.HelperLib
     public static Boolean IsWindowsVista { get { return (Environment.OSVersion.Platform == PlatformID.Win32NT) && (Environment.OSVersion.Version.Major == 6) && (Environment.OSVersion.Version.Minor == 0); } }
     public static Boolean IsWindows7 { get { return (Environment.OSVersion.Platform == PlatformID.Win32NT) && (Environment.OSVersion.Version.Major == 6) && (Environment.OSVersion.Version.Minor == 1); } }
     public static Boolean IsWindows8 { get { return (Environment.OSVersion.Platform == PlatformID.Win32NT) && (Environment.OSVersion.Version.Major == 6) && (Environment.OSVersion.Version.Minor == 2); } }
+    public static bool IsBrowserApplication { get { return System.Windows.Interop.BrowserInteropHelper.IsBrowserHosted; } }
+
+
     public static readonly Random RandomObj = new Random();
 
     private static CultureInfo _defaultCultureInfo = CultureInfo.CreateSpecificCulture("en");

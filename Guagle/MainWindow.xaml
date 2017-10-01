@@ -19,6 +19,7 @@
         <RowDefinition Height="Auto"/>
         <RowDefinition Height="*"/>
         <RowDefinition Height="Auto"/>
+        <RowDefinition Height="Auto"/>
       </Grid.RowDefinitions>
 
       <Grid Grid.Row="0">
@@ -33,14 +34,24 @@
       <Grid Grid.Row="1" Name="GuaguaGrid" PreviewMouseLeftButtonDown="GuaguaGrid_PreviewMouseLeftButtonDown">
         
       </Grid>
-      <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right">
+      <StackPanel Grid.Row="2">
+        <StackPanel Orientation="Horizontal">
+          <TextBlock Text="Random1:"/>
+          <TextBlock Text="{Binding Path=RandomString1}"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal">
+          <TextBlock Text="Random2:"/>
+          <TextBlock Text="{Binding Path=RandomString2}"/>
+        </StackPanel>
+      </StackPanel>
+      <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Right">
         <Button Style="{StaticResource DialogCloseButtonStyle}" Click="btnRequest_Click"
                 Content="{x:Static AppStrings:Resources.Common_Request}"/>
         <Button Style="{StaticResource DialogCloseButtonStyle}" Click="btnRequestAgain_Click"
                 IsEnabled="{Binding Path=CanRequestAgain}"
                 Content="{x:Static AppStrings:Resources.Common_Again}"/>
-        <Button Style="{StaticResource DialogCloseButtonStyle}" IsCancel="True"
-                Content="{x:Static AppStrings:Resources.Common_OK}"/>
+        <Button Style="{StaticResource DialogCloseButtonStyle}" Click="btnTest_Click"
+                Content="{x:Static AppStrings:Resources.Common_Test}"/>
       </StackPanel>
     </Grid>
   </Border>

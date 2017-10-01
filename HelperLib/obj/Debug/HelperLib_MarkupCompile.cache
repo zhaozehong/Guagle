@@ -12,9 +12,9 @@ DEBUG;TRACE
 
 26-796550212
 
-12-1251608593
+17-2042823008
 14-87390609
 Resources\Brushes.xaml;Resources\Styles\BorderStyle.xaml;Resources\Styles\ButtonStyle.xaml;Resources\Styles\CheckBoxStyle.xaml;Resources\Styles\ComboBoxStyle.xaml;Resources\Styles\DataGridStyle.xaml;Resources\Styles\ExpanderStyle.xaml;Resources\Styles\GridSplitterStyle.xaml;Resources\Styles\GroupBoxStyle.xaml;Resources\Styles\ImageStyle.xaml;Resources\Styles\ListBoxStyle.xaml;Resources\Styles\ListViewStyle.xaml;Resources\Styles\MenuStyle.xaml;Resources\Styles\PasswordBoxStyle.xaml;Resources\Styles\ProgressBarStyle.xaml;Resources\Styles\RichTextBoxStyle.xaml;Resources\Styles\ScrollViewerStyle.xaml;Resources\Styles\SeparatorStyle.xaml;Resources\Styles\SpecialStyles.xaml;Resources\Styles\Styles.xaml;Resources\Styles\TabStyle.xaml;Resources\Styles\TextBlockStyle.xaml;Resources\Styles\TextBoxStyle.xaml;Resources\Styles\ToolBarStyle.xaml;Resources\Styles\TreeViewStyle.xaml;Resources\Styles\UserControlStyles.xaml;
 
-False
+True
 
